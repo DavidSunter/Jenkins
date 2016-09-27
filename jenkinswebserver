@@ -1,0 +1,12 @@
+stage('Build') {
+
+    node('ivan') {
+
+        git 'https://github.com/IvanDechovsky/Dev-Environment.git'
+        git 'https://github.com/CameronC17/PokerGameAPI.git'
+        sh 'npm install'
+        sh 'pm2 start app.js'
+
+    }
+
+}
