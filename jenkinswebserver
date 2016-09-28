@@ -45,7 +45,7 @@ stage('production') {
 
 
 
-      "app" : {
+
 
         node('rat-app-prod') {
 
@@ -59,12 +59,12 @@ stage('production') {
 
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on production', teamDomain: 'spartaglobal'
 
-            }
-
-         },
+            },
 
 
-     "api" : {
+
+
+
 
         node('rat-api-prod') {
 
@@ -78,11 +78,9 @@ stage('production') {
             sh 'pm2 start app.js -f'
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through API on production', teamDomain: 'spartaglobal'
 
-               }
+               },
 
-            },
 
-            "database" : {
 
             node('rat-db-prod') {
 
@@ -96,6 +94,6 @@ stage('production') {
 
             }
 
-         }
-    
+         
+
 }
