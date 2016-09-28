@@ -13,7 +13,7 @@ stage('Build') {
             git 'https://github.com/CameronC17/PokerGameFE'
             sh 'npm install'
             sh 'pm2 start app.js -f'
-            slackSend channel: '#pokerbalmz', color: 'good', message: 'Pipeline through APP now Running', teamDomain: 'Sparta Global'
+            slackSend channel: '#pokerbalmz', color: 'good', message: 'Pipeline through APP now Running', teamDomain: 'spartaglobal'
 
             }
 
@@ -31,7 +31,7 @@ stage('Build') {
             git 'https://github.com/CameronC17/PokerGameAPI'
             sh 'npm install'
             sh 'pm2 start app.js -f'
-            slackSend channel: '#pokerbalmz', color: 'good', message: 'Pipeline through API now Running', teamDomain: 'Sparta Global'
+            slackSend channel: '#pokerbalmz', color: 'good', message: 'Pipeline through API now Running', teamDomain: 'spartaglobal'
 
                }
 
