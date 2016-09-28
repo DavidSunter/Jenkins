@@ -49,7 +49,7 @@ parallel(
   "app" :{
 
 
-        node('rat-app-prod') {
+        node('rat-papp') {
 
         git 'https://github.com/IvanDechovsky/Dev-Environment'
         sh 'sudo apt-get install curl'
@@ -65,7 +65,7 @@ parallel(
 
     "api": {
 
-        node('rat-api-prod') {
+        node('rat-papi') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
@@ -84,7 +84,7 @@ parallel(
 
 
 
-            node('rat-db-prod') {
+            node('rat-pdb') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
