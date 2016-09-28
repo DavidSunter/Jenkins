@@ -43,7 +43,7 @@ stage('Build') {
 
 stage('production') {
 
-  parallel (
+
 
       "app" : {
 
@@ -97,5 +97,5 @@ stage('production') {
             }
 
          }
-    )
+    
 }
