@@ -13,7 +13,6 @@ stage('Build') {
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             git 'https://github.com/CameronC17/PokerGameFE'
             sh 'npm install'
-
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on test', teamDomain: 'spartaglobal'
 
             }
@@ -52,24 +51,19 @@ parallel(
 
         node('rat-app-prod') {
 
-            git 'https://github.com/IvanDechovsky/Dev-Environment'
-            sh 'sudo apt-get install curl'
-            sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
-            sh 'sudo dpkg --configure -a'
-            sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-            git 'https://github.com/CameronC17/PokerGameFE'
-            sh 'npm install'
-
-            slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on production', teamDomain: 'spartaglobal'
+        git 'https://github.com/IvanDechovsky/Dev-Environment'
+        sh 'sudo apt-get install curl'
+        sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+        sh 'sudo dpkg --configure -a'
+        sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
+        git 'https://github.com/CameronC17/PokerGameFE'
+        sh 'npm install'
+        slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on test', teamDomain: 'spartaglobal'
 
             }
             },
 
     "api": {
-
-
-
-
 
         node('rat-api-prod') {
 
