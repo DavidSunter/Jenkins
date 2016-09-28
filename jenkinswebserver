@@ -73,6 +73,7 @@ parallel(
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             git 'https://github.com/CameronC17/PokerGameAPI'
             sh 'npm install'
+            sh 'pm2 kill'
             sh 'pm2 start app.js -f'
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through API on production', teamDomain: 'spartaglobal'
 
