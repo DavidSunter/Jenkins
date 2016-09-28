@@ -8,8 +8,8 @@ stage('Build') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
-            sh 'sudo dpkg --configure -a'
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+            sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             git 'https://github.com/CameronC17/PokerGameFE'
             sh 'npm install'
@@ -26,9 +26,8 @@ stage('Build') {
         node('standard') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
-            sh 'sudo apt-get install curl'
-            sh 'sudo dpkg --configure -a'
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+            sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             git 'https://github.com/CameronC17/PokerGameAPI'
             sh 'npm install'
@@ -52,8 +51,8 @@ stage('production') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
-            sh 'sudo dpkg --configure -a'
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+            sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             git 'https://github.com/CameronC17/PokerGameFE'
             sh 'npm install'
@@ -71,8 +70,8 @@ stage('production') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
-            sh 'sudo dpkg --configure -a'
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+            sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
             git 'https://github.com/CameronC17/PokerGameAPI'
             sh 'npm install'
@@ -82,15 +81,15 @@ stage('production') {
                }
 
             },
-            
+
             "database" : {
-            
+
             node('rat-db-prod') {
 
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
-            sh 'sudo dpkg --configure -a'
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+            sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[db]\''
 
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through database on production', teamDomain: 'spartaglobal'
