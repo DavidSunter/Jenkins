@@ -59,7 +59,7 @@ stage('production') {
 
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on production', teamDomain: 'spartaglobal'
 
-            },
+            }
 
 
 
@@ -78,7 +78,7 @@ stage('production') {
             sh 'pm2 start app.js -f'
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through API on production', teamDomain: 'spartaglobal'
 
-               },
+               }
 
 
 
@@ -94,6 +94,6 @@ stage('production') {
 
             }
 
-         
+
 
 }
