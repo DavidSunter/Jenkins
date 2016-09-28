@@ -57,7 +57,6 @@ parallel(
         sh 'sudo dpkg --configure -a'
         sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
         git 'https://github.com/CameronC17/PokerGameFE'
-        sh 'npm install'
         slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on test', teamDomain: 'spartaglobal'
 
             }
