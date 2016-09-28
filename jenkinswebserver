@@ -1,5 +1,26 @@
 stage('Build') {
 
+  parallel (
+
+      "app" : {
+    node('ivan') {
+
+        git 'https://github.com/IvanDechovsky/Dev-Environment'
+
+        sh 'sudo apt-get install curl'
+        sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+        sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
+        git 'https://github.com/CameronC17/PokerGameFE'
+        sh 'npm install'
+        sh 'pm2 start app.js -f'
+        slackSend channel: '#pokerbalmz', color: 'good', message: 'Pipeline through APP now Running', teamDomain: 'Sparta Global'
+
+
+                }
+
+            },
+
+     "api" : {
     node('ivan') {
 
         git 'https://github.com/IvanDechovsky/Dev-Environment'
@@ -10,7 +31,10 @@ stage('Build') {
         git 'https://github.com/CameronC17/PokerGameAPI'
         sh 'npm install'
         sh 'pm2 start app.js -f'
+        slackSend channel: '#pokerbalmz', color: 'good', message: 'Pipeline through API now Running', teamDomain: 'Sparta Global'
 
-    }
+               }
 
+            }
+    )
 }
