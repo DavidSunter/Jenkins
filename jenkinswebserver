@@ -86,9 +86,7 @@ stage('production') {
             git 'https://github.com/IvanDechovsky/Dev-Environment'
             sh 'sudo apt-get install curl'
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
-            sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-            git 'https://github.com/CameronC17/PokerGameFE'
-            sh 'npm install'
+            sh 'sudo chef-client --local-mode --runlist \'recipe[db]\''
 
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through database on production', teamDomain: 'spartaglobal'
 
