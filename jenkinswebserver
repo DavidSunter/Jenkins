@@ -32,6 +32,7 @@ stage('Build') {
             sh 'npm install mocha -g'
             sh 'npm install chai-http -g'
             sh 'npm install chai -g'
+            sh 'sudo chef-client --local-mode --runlist \'recipe[db]\''
             sh 'npm install'
             sh 'mocha'
             sh 'pm2 kill'
