@@ -11,7 +11,7 @@ stage('Build') {
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
             sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-            git 'https://github.com/CameronC17/PokerGameFE'
+            git branch: 'dev', url: 'https://github.com/CameronC17/PokerGameFE'
             sh 'npm install'
             slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on test', teamDomain: 'spartaglobal'
 
@@ -28,7 +28,7 @@ stage('Build') {
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
             sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-            git 'https://github.com/CameronC17/PokerGameAPI'
+            git branch: 'dev', url: 'https://github.com/CameronC17/PokerGameAPI'
             sh 'npm install'
             sh 'pm2 kill'
             sh 'pm2 start app.js -f'
@@ -36,7 +36,25 @@ stage('Build') {
 
                }
 
-            }
+            },
+
+          "TDD" : {
+          node('standard') {
+
+              git 'https://github.com/IvanDechovsky/Dev-Environment'
+              sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
+              sh 'sudo dpkg --configure -a'
+              sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
+              git branch: 'dev', url: 'https://github.com/CameronC17/PokerGameAPI'
+              sh 'npm install mocha -g'
+              sh 'npm install chai-http -g'
+              sh 'npm install chai -g'
+              sh 'npm install'
+              sh 'mocha'
+              slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through API on TDD', teamDomain: 'spartaglobal'
+
+                 }
+          }
     )
 }
 
@@ -57,8 +75,10 @@ parallel(
         sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
         sh 'sudo dpkg --configure -a'
         sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-        git 'https://github.com/CameronC17/PokerGameFE'
+        git branch: 'dev', url: 'https://github.com/CameronC17/PokerGameFE'
         sh 'npm install'
+        sh 'pm2 kill'
+        sh 'pm2 start app.js -f'
         slackSend channel: '#pokerbalmz', color: 'good', message: 'Pimpline running through APP on test', teamDomain: 'spartaglobal'
 
             }
@@ -73,7 +93,8 @@ parallel(
             sh 'curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -P chefdk -c stable -v 0.16.28'
             sh 'sudo dpkg --configure -a'
             sh 'sudo chef-client --local-mode --runlist \'recipe[webserver]\''
-            git 'https://github.com/CameronC17/PokerGameAPI'
+            git
+            git branch: 'dev', url: 'https://github.com/CameronC17/PokerGameAPI'
             sh 'npm install'
             sh 'pm2 kill'
             sh 'pm2 start app.js -f'
